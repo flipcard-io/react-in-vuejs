@@ -1,14 +1,14 @@
 <script setup lang="ts">
 import React from "react";
 import ReactDOM from "react-dom/client";
-import {onBeforeUnmount, onMounted, ref} from "vue";
+import {onBeforeUnmount, onMounted, ref, shallowRef} from "vue";
 
 const props = defineProps<{
   component?: React.ReactElement
 }>()
 
 const container = ref<HTMLElement | null>(null)
-const root = ref<ReactDOM.Root | null>(null)
+const root = shallowRef<ReactDOM.Root | null>(null)
 
 const initialize = (component?: React.ReactElement) => {
   if (container.value && component) {

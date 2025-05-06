@@ -1,13 +1,12 @@
 <script setup lang="ts">
 import ReactBridgeComponent from "@/components/ReactBridgeComponent.vue";
-import {ref} from "vue";
 import {createExcaldrawReactComponent} from "@/components/excalidraw-tool";
 import type {
   ExcaldrawToolReactProps
 } from "@/components/excalidraw-tool/model/ExcaldrawToolReactProps.ts";
 import type {ExcalidrawInitialDataState} from "@excalidraw/excalidraw/types";
 
-const component = ref(createExcaldrawReactComponent({
+const component = createExcaldrawReactComponent({
   onHeightChange: (height: number) => {
     console.log("Height changed to: ", height);
   },
@@ -16,7 +15,7 @@ const component = ref(createExcaldrawReactComponent({
   },
   height: 500,
   isResizable: true
-} as ExcaldrawToolReactProps));
+} as ExcaldrawToolReactProps);
 </script>
 
 <template>
