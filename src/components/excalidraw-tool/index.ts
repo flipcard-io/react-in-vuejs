@@ -13,14 +13,19 @@ export const createExcaldrawReactComponent = ({
                                                 data,
                                                 isResizable
                                               }: ExcaldrawToolReactProps) => {
-  console.log('ExcaldrawToolComponent props:', { onChange, onHeightChange, isResizable });
+  console.log('ExcaldrawToolComponent props:', {onChange, onHeightChange, isResizable});
   console.log('Type of onChange:', typeof onChange);
   console.log('Type of onHeightChange:', typeof onHeightChange);
-  return React.createElement(ExcaldrawToolComponent, {
-    height: height,
-    data: data,
-    onChange: onChange,
-    onHeightChange: onHeightChange,
-    isResizable: isResizable
-  } as ExcaldrawToolReactProps)
+  try {
+
+    return React.createElement(ExcaldrawToolComponent, {
+      height: height,
+      data: data,
+      onChange: onChange,
+      onHeightChange: onHeightChange,
+      isResizable: isResizable
+    } as ExcaldrawToolReactProps)
+  } catch (e) {
+    console.log('Error creating ExcaldrawToolComponent:', e);
+  }
 }
