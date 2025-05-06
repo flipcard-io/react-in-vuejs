@@ -4,7 +4,6 @@ import {Excalidraw} from "@excalidraw/excalidraw";
 
 import type {OrderedExcalidrawElement} from "@excalidraw/excalidraw/element/types";
 import type {AppState, BinaryFiles, ExcalidrawInitialDataState} from "@excalidraw/excalidraw/types";
-import {debounce} from "lodash";
 import type {
   ExcaldrawToolReactProps
 } from "@/components/excalidraw-tool/model/ExcaldrawToolReactProps.ts";
@@ -78,7 +77,7 @@ export const ExcaldrawToolComponent = ({
     >
       <Excalidraw
         initialData={data}
-        onChange={debounce(handleChange, 300)}
+        onChange={handleChange}
       />
     </div>
   );
