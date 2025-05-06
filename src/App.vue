@@ -1,9 +1,22 @@
 <script setup lang="ts">
-import { createReactHelloWorldComponent } from "./components/utils";
 import ReactBridgeComponent from "@/components/ReactBridgeComponent.vue";
 import {ref} from "vue";
-import HelloWorld from "@/components/HelloWorld.vue";
-const component = ref(createReactHelloWorldComponent());
+import {createExcaldrawReactComponent} from "@/components/excalidraw-tool";
+import type {
+  ExcaldrawToolReactProps
+} from "@/components/excalidraw-tool/model/ExcaldrawToolReactProps.ts";
+import type {ExcalidrawInitialDataState} from "@excalidraw/excalidraw/types";
+
+const component = ref(createExcaldrawReactComponent({
+  onHeightChange: (height: number) => {
+    console.log("Height changed to: ", height);
+  },
+  onChange: (data: ExcalidrawInitialDataState) => {
+    console.log("Data changed to: ", data);
+  },
+  height: 500,
+  isResizable: true
+} as ExcaldrawToolReactProps));
 </script>
 
 <template>
@@ -11,8 +24,7 @@ const component = ref(createReactHelloWorldComponent());
   </header>
 
   <main>
-    <HelloWorld message="Vuejs component" />
-    <ReactBridgeComponent :component="component" />
+    <ReactBridgeComponent :component="component"/>
   </main>
 </template>
 
