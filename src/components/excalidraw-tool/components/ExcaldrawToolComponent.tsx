@@ -24,6 +24,11 @@ export const ExcaldrawToolComponent = ({
     const element = containerRef.current;
     if (!element) return;
 
+    if (typeof onHeightChange !== 'function') {
+      console.log("onHeightChange", onHeightChange);
+      return;
+    }
+
     const resizeObserver = new ResizeObserver(entries => {
       const entry = entries[0];
       if (!entry.contentRect) return;
@@ -35,13 +40,18 @@ export const ExcaldrawToolComponent = ({
     return () => {
       resizeObserver.disconnect();
     };
-  }, [isResizable]);
+  }, [isResizable, onHeightChange]);
 
   const handleChange = useCallback((
     elements: readonly OrderedExcalidrawElement[],
     state: AppState,
     files: BinaryFiles
   ) => {
+
+    if (typeof onChange !== 'function') {
+      console.log("onChange", onChange);
+      return;
+    }
 
     const {collaborators, ...appStateWithoutCollaborators} = state;
     const result: ExcalidrawInitialDataState = {
