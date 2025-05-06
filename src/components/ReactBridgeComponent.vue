@@ -23,19 +23,19 @@ const initialize = (component?: React.ReactElement) => {
   }
 }
 
-// const unmount = () => {
-//   if (root.value) {
-//     root.value.unmount();
-//     root.value = null;
-//   }
-// }
+const unmount = () => {
+  if (root.value) {
+    root.value.unmount();
+    root.value = null;
+  }
+}
 
 onMounted(() => {
   initialize(props.component)
 })
 
 onBeforeUnmount(() => {
-  // unmount();
+  unmount();
 })
 
 </script>
