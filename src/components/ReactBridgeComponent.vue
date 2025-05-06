@@ -4,13 +4,13 @@ import ReactDOM from "react-dom/client";
 import {onBeforeUnmount, onMounted, ref} from "vue";
 
 const props = defineProps<{
-  component?: React.ReactNode
+  component?: React.ReactElement
 }>()
 
 const container = ref<HTMLElement | null>(null)
 const root = ref<ReactDOM.Root | null>(null)
 
-const initialize = (component?: React.ReactNode) => {
+const initialize = (component?: React.ReactElement) => {
   if (container.value && component) {
     try {
       root.value = ReactDOM.createRoot(container.value);
