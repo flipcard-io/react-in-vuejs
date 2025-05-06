@@ -16,41 +16,33 @@ export const ExcaldrawToolComponent = ({
                                          isResizable
                                        }: ExcaldrawToolReactProps): JSX.Element => {
 
-  const containerRef = useRef<HTMLDivElement>(null); // Ref for the scrollable div
+  const containerRef = useRef<HTMLDivElement>(null);
 
-// Effect to observe resize changes
   useEffect(() => {
-    if (!isResizable) return; // Skip observation if resizing is disabled
+    if (!isResizable) return;
 
     const element = containerRef.current;
-    if (!element) return; // Exit if the element is not yet available
+    if (!element) return;
 
-    // Create a ResizeObserver instance
     const resizeObserver = new ResizeObserver(entries => {
-      const entry = entries[0]; // Get the first entry
-      if (!entry.contentRect) return; // Exit if contentRect is not available
+      const entry = entries[0];
+      if (!entry.contentRect) return;
       onHeightChange(entry.contentRect.height);
     });
 
-    // Start observing the div element
     resizeObserver.observe(element);
 
-    // Cleanup function: disconnect the observer when the component unmounts
     return () => {
       resizeObserver.disconnect();
     };
-  }, [isResizable]); // Add isResizable to dependencies
+  }, [isResizable]);
 
-  // Handle changes in the Excalidraw component and update state/notify parent
   const handleChange = useCallback((
     elements: readonly OrderedExcalidrawElement[],
     state: AppState,
     files: BinaryFiles
   ) => {
-    // create a partial AppState without collaborators property, because it is posing some issues
-    // when we are trying to serialize the object
-    //https://github.com/excalidraw/excalidraw/issues/8637
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+
     const {collaborators, ...appStateWithoutCollaborators} = state;
     const result: ExcalidrawInitialDataState = {
       appState: appStateWithoutCollaborators,
@@ -69,10 +61,10 @@ export const ExcaldrawToolComponent = ({
       ref={containerRef}
       style={{
         height: `${height}px`,
-        overflowY: "scroll", // Keep scroll for content overflow
-        resize: isResizable ? "vertical" : "none",  // Add CSS resize property
-        minHeight: "100px", // Optional: Set a minimum height
-        maxHeight: "2000px"  // Optional: Set a maximum height
+        overflowY: "scroll",
+        resize: isResizable ? "vertical" : "none",
+        minHeight: "100px",
+        maxHeight: "2000px"
       }}
     >
       <Excalidraw
